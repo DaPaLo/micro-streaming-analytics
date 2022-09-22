@@ -1,0 +1,21 @@
+version: '3'
+services:
+  rabbit:
+    image: "rabbitmq:3-management"
+    container_name: "rabbitmq-iiot"
+    environment:
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "admin"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  mongo:
+    image: mongo:latest
+    container_name: "mongo-iiot"
+    environment:
+      MONGO_DATA_DIR: "/data/db"
+      MONGO_INITDB_DATABASE: "messaging"
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "admin"
+    ports:
+      - "27017:27017"
